@@ -1,0 +1,29 @@
+int func(int ind,int k,vector<vector<int>>& piles,int n,vector<vector<int>>&dp)
+    {
+        if(ind==n)
+            return 0;
+        if(dp[ind][k]!=-1)
+            return dp[ind][k];
+        if(k==0)
+            return 0;
+        //not pick
+        int p=func(ind+1,k,piles,n,dp);
+        //pick
+        int curr=0;
+       // int len=min(piles[ind].size(),k);
+        for(int j=0;j<piles[ind].size();j++)
+        {
+            curr+=piles[ind][j];
+            if(k-j-1>=0)
+            p=max(p,curr+func(ind+1,k-j-1,piles,n,dp));
+        }
+        return dp[ind][k]=p;
+    }
+    int maxValueOfCoins(vector<vector<int>>& piles, int k){
+        int n=piles.size();
+        vector<vector<int>>dp(n+1,vector<int>(k+1,-1));
+        return func(0,k,piles,n,dp);
+        
+        
+        
+    }
