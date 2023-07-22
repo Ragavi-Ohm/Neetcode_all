@@ -1,0 +1,19 @@
+int minCost(vector<vector<int>> &cost)
+{
+	//	Write your code here.
+	int n=cost.size();
+	vector<int>dp(3,0);
+	
+	for(int i=0;i<n;i++)
+	{
+		int dp0=cost[i][0]+min(dp[1],dp[2]);
+		int dp1=cost[i][1]+min(dp[0],dp[2]);
+		int dp2=cost[i][2]+min(dp[0],dp[1]);
+		dp[0]=dp0;
+		dp[1]=dp1;
+		dp[2]=dp2;
+       
+	}
+	return *min_element(dp.begin(),dp.end());
+
+}
