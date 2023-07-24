@@ -1,0 +1,29 @@
+#include <bits/stdc++.h> 
+int numDistinct(string S, string T) {
+    // Write your code here
+    int n1=S.length();
+    int n2=T.length();
+    int mod=1e9;
+    vector<vector<long long int>>dp(n1+1,vector<long long int>(n2+1,0));
+    dp[n1][n2]=1;
+    if(n1>n2)
+    {
+        for(int i=0;i<n1;i++)
+        {
+            dp[i][n2]=1;
+        }
+    }
+    for(int i=n1-1;i>=0;i--)
+    {
+        for(int j=n2-1;j>=0;j--)
+        {
+            long long int p=0;
+            if(S[i]==T[j])
+            p=dp[i+1][j+1];
+            long long int np=dp[i+1][j];
+            dp[i][j]=(p+np)%mod;
+
+        }
+    }
+    return dp[0][0];
+}
