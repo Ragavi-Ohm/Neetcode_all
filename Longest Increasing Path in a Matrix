@@ -1,0 +1,31 @@
+int func(int r,int c,int preval,vector<vector<int>>& matrix,int m,int n,vector<vector<int>>&dp)
+    {
+        if(r<0 || c<0 ||r>=m ||c>=n||preval>=matrix[r][c])
+            return 0;
+        //pick
+        if(dp[r][c]!=-1)
+            return dp[r][c];
+        int res=1;
+        res=max(res,1+func(r+1,c,matrix[r][c],matrix,m,n,dp));
+        res=max(res,1+func(r-1,c,matrix[r][c],matrix,m,n,dp));
+        res=max(res,1+func(r,c+1,matrix[r][c],matrix,m,n,dp));
+        res=max(res,1+func(r,c-1,matrix[r][c],matrix,m,n,dp));
+        return dp[r][c]=res;
+        
+    }
+        
+    int longestIncreasingPath(vector<vector<int>>& matrix) {
+        int lip=1;
+        int m=matrix.size();
+        int n=matrix[0].size();
+        vector<vector<int>>dp(m+1,vector<int>(n+1,-1)); 
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                
+                lip=max(lip,func(i,j,-1,matrix,m,n,dp));
+            }
+        }
+        return lip;
+    }
