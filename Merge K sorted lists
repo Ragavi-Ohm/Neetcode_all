@@ -1,0 +1,45 @@
+ListNode* merge(ListNode* l1,ListNode* l2)
+    {
+        ListNode* node=new ListNode();
+        ListNode* temp=node;
+        while(l1 && l2)
+        {
+            if(l1->val<l2->val)
+            {
+                temp->next=l1;
+                l1=l1->next;
+            }
+            else
+            {
+                temp->next=l2;
+                l2=l2->next;
+            }
+            temp=temp->next;
+        }
+        if(l1)
+        {
+            temp->next=l1;
+        }
+        else if(l2)
+        {
+            temp->next=l2;
+        }
+        return node->next;
+    }
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        int i=2,n=lists.size();
+        
+        if(n==0)
+            return nullptr;
+        if(n==1)
+            return lists[0];
+        ListNode* node=merge(lists[0],lists[1]);
+        while(i<n)
+        {
+            node=merge(lists[i],node);
+            
+            i++;
+        }
+        return node;
+        
+    }
