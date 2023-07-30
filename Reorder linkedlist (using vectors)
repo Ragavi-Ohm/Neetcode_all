@@ -1,0 +1,26 @@
+ void reorderList(ListNode* head) {
+        vector<int>v;
+        ListNode* temp=head;
+        while(temp!=NULL)
+        {
+            v.push_back(temp->val);
+            temp=temp->next;
+        }
+        int l=0,r=v.size()-1;
+        ListNode* temp1=head;
+        while(l<r)
+        {
+            temp1->val=v[l];
+            temp1=temp1->next;
+            temp1->val=v[r];
+            temp1=temp1->next;
+            l++;
+            r--;
+        }
+        if(l==r)
+        {
+            temp1->val=v[l];
+            temp1=temp1->next;
+        }
+       
+    }
