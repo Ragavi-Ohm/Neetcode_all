@@ -1,0 +1,47 @@
+#include <iostream>
+#include<vector>
+#include<bits/stdc++.h>
+using namespace std;
+
+int func(int ind,int k,vector<int>&arr,vector<int>&dp,int n)
+{
+    if(dp.size()==k)
+    return 0;
+    if(ind==n && dp.size()<k)
+    return 1e9;
+    
+    
+    //pick
+    int p=INT_MAX;
+    if(dp.size()==0)
+    {
+        dp.push_back(arr[ind]);
+        p=func(ind+1,k,arr,dp,n)+arr[ind];
+        dp.pop_back();
+    }
+    if(dp.size()==1 && arr[ind]>dp[0])
+    {
+        dp.push_back(arr[ind]);
+        p=func(ind+1,k,arr,dp,n)+arr[ind];
+        dp.pop_back();
+    }
+    if(dp.size()==2 && arr[ind]<dp[1])
+    {
+        dp.push_back(arr[ind]);
+        p=func(ind+1,k,arr,dp,n)+arr[ind];
+        dp.pop_back();
+    }
+    //not pick
+    int np=func(ind+1,k,arr,dp,n)+0;
+    return min(p,np);
+    
+}
+int main() {
+    vector<int>arr{3,4,5,1,2,3,1};
+    int k=3;
+    vector<int>dp;
+    int ans=func(0,k,arr,dp,arr.size());
+    cout<<ans;
+    
+	
+}
