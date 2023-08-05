@@ -1,0 +1,9 @@
+ int lengthOfLastWord(string s) {
+        stringstream ss(s);
+        string word ,lword;
+        while (ss >> word){
+           lword=word;
+        }
+        return lword.size();
+        
+    }
