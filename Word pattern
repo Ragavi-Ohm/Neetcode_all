@@ -1,0 +1,35 @@
+bool wordPattern(string pattern, string s) {
+        stringstream ss(s);
+        string word;
+        vector<string>s2;
+        
+        while(ss>>word)
+        {
+            s2.push_back(word);
+        }
+        if(s2.size()!=pattern.length())
+            return false;
+        map<char,string>mp;
+        map<string,int>mp1;
+        for(int i=0;i<pattern.length();i++)
+        {
+            if(mp.find(pattern[i])==mp.end())
+            {
+                if(mp1[s2[i]]<1){
+                    mp[pattern[i]]=s2[i];
+                    mp1[s2[i]]++;
+                }
+                else
+                    return false;
+                
+                
+            }
+            else
+            {
+                if(mp[pattern[i]]!=s2[i])
+                    return false;
+            }
+        }
+        return true;
+        
+    }
