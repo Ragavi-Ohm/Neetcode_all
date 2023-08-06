@@ -1,0 +1,29 @@
+ vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        vector<vector<string>>res;
+        vector<string>s=strs;
+        int n=strs.size();
+        for(int i=0;i<n;i++)
+        {
+            sort(strs[i].begin(),strs[i].end());
+        }
+        map<int,int>mp;
+        for(int i=0;i<n;i++)
+        {
+            vector<string>v;
+            if(mp[i]!=1)
+            v.push_back(s[i]);
+            mp[i]=1;
+            for(int j=i+1;j<n;j++)
+            {
+                if(strs[i]==strs[j] && mp[j]!=1)
+                {
+                    v.push_back(s[j]);
+                    mp[j]=1;
+                }
+            }
+            if(v.size()!=0)
+            res.push_back(v);
+        }
+        return res;
+        
+    }
