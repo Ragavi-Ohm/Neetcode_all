@@ -1,0 +1,27 @@
+vector<int> productExceptSelf(vector<int>& nums) {
+        vector<int>pre;
+        vector<int>post;
+        pre.push_back(1);
+        int pref=1,postf=1;
+        for(auto it:nums)
+        {
+            
+            pref=pref*it;
+            pre.push_back(pref);
+        }
+        post.push_back(1);
+        for(int i=nums.size()-1;i>=0;i--)
+        {
+           
+            postf=postf*nums[i];
+            post.push_back(postf);
+        }
+        reverse(post.begin(),post.end());
+        vector<int>ans;
+        for(int i=0;i<pre.size()-1;i++)
+        {
+            ans.push_back(pre[i]*(post[i+1]));
+        }
+        return ans;
+            
+    }
