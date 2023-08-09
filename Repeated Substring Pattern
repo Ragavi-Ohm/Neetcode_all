@@ -1,0 +1,9 @@
+ bool repeatedSubstringPattern(string s) {
+        string s1=s+s;
+        string s2=s1.substr(1,s1.length()-2);
+        if(s2.find(s)==string::npos)
+            return false;
+        else
+            return true;
+        
+    }
