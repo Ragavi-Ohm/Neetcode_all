@@ -1,0 +1,14 @@
+int minSwaps(string s) {
+        int maxi=INT_MIN;
+        int curr=0;
+        for(int i=0;i<s.length();i++)
+        {
+            if(s[i]==']')
+                curr+=1;
+            else
+                curr-=1;
+            maxi=max(maxi,curr);
+        }
+        return (maxi+1)/2;
+        
+    }
