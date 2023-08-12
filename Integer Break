@@ -1,0 +1,21 @@
+int func(int ind,int sum,vector<int>&v,int n)
+    {
+        if(ind==n)
+            return 1;
+        if(sum==0)
+            return 1;
+        //pick
+        int p=INT_MIN;
+        if(v[ind]<=sum)
+            p=func(ind,sum-v[ind],v,n)*v[ind];
+        int np=func(ind+1,sum,v,n);
+        return max(p,np);
+    }
+    int integerBreak(int n) {
+        vector<int>v;
+        for(int i=1;i<n;i++)
+        {
+            v.push_back(i);
+        }
+        return func(0,n,v,v.size());
+    }
