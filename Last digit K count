@@ -1,0 +1,26 @@
+int Solution::solve(int A, int B, int C) {
+    int cnt=0,start=0;
+    int range=A-B;
+    for(int i=A;i<=B;i++)
+    {
+        if(i%10==C)
+        {
+            start=i;
+           
+            break;
+        }
+    }
+    int end=0;
+    for(int i=B;i>=A;i--)
+    {
+        if(i%10==C)
+        {
+            end=i;
+            break;
+        }
+    }
+    if(start==0 || end==0)
+    return 0;
+    cnt=((end-start)/10)+1;
+    return cnt;
+}
