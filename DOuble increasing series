@@ -1,0 +1,140 @@
+ACTUAL SOL:
+int mod = 1e9+7;
+
+// top down 
+
+
+int helper(int A, int len, vector<vector<int>> &dp){
+
+   if(len == 1) return A; // A = 5, => {1 || 2 || 3 || 4 || 5}
+
+   if(A == 0)   return 0; // A = 0 => no positives are present
+
+   
+
+   if(dp[A][len] != -1) return dp[A][len];
+
+   
+
+   return dp[A][len] = (helper(A/2, len-1, dp) + helper(A-1, len, dp))%mod;
+
+}
+
+
+
+
+
+// down top 
+
+
+int Solution::solve(int A, int len) {
+
+    vector<vector<int>> dp(A+1, vector<int>(len+1));
+
+    
+
+    // if A == 0 no sequences possible of positive elts
+
+    // if len = 0, no sequences
+
+    // if len = 1, no of sequences are = A itself, {1 | 2 | 3 | ... | A-1 | A}
+
+    // i for A, j for len
+
+    for(int i = 0; i <= A; i++){
+
+        for(int j = 0; j <= len; j++){
+
+            if(i == 0)  dp[0][j] = 0; // just for understanding, o/t initialized already
+
+            else if(j == 0)  dp[i][0] = 0; // just for understanding, o/t initialized already
+
+            else if(j == 1)  dp[i][1] = i;
+
+            else
+
+            // otherwise, 2 possibilities
+
+                dp[i][j] = (dp[i/2][j-1] + dp[i-1][j])%mod;
+
+        }
+
+    }
+
+    
+
+    return dp[A][len];
+
+}
+
+
+
+my sol:
+int func(int ind,int prev,vector<int>&v,int n,int cnt)
+{
+    int mod=1e9+7;
+    if(cnt==0)
+    return 1;
+    // if(dp[ind][prev+1]!=-1)
+    // return dp[ind][prev+1];
+    if(ind==n)
+    {
+        return 0;
+    }
+    
+    //pick
+    int p=0;
+    if(prev==-1||v[prev]<=(v[ind])/2)
+    p=func(ind+1,ind,v,n,cnt-1);
+    int np=func(ind+1,prev,v,n,cnt);
+    return (p+np)%mod;
+}
+
+int Solution::solve(int A, int B) {
+    vector<int>v;
+    for(int i=1;i<=A;i++)
+    {
+        v.push_back(i);
+    }
+    int n=v.size();
+    // vector<vector<int>>dp(n+1,vector<int>(n+1,-1));
+    return func(0,-1,v,v.size(),B);
+}
+
+
+
+
+
+int func(int ind,int prev,vector<int>&v,int n,int cnt,vector<vector<vector<int>>>&dp)
+{
+    long long int mod=1e9+7;
+    if(cnt==0)
+    return 1;
+    if(dp[ind][prev+1][cnt]!=-1)
+    return dp[ind][prev+1][cnt];
+    if(ind==n)
+    {
+        return 0;
+    }
+    
+    //pick
+    long long int p=0;
+    if(prev==-1||v[prev]<=(v[ind])/2)
+    p=func(ind+1,ind,v,n,cnt-1,dp)%mod;
+    long long int np=func(ind+1,prev,v,n,cnt,dp)%mod;
+    return dp[ind][prev+1][cnt]=(p+np)%mod;
+}
+
+int Solution::solve(int A, int B) {
+    vector<int>v;
+    for(int i=1;i<=A;i++)
+    {
+        v.push_back(i);
+    }
+    int n=v.size();
+    if(v.size()<B)
+    return 0;
+    vector<vector<vector<int>>>dp(n+1,vector<vector<int>>(n+1,vector<int>(B+1,-1)));
+    
+   
+    return func(0,-1,v,v.size(),B,dp);
