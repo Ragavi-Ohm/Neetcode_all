@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+int func(int ind,vector<int>v,vector<int> &price,int sum,int n,vector<vector<int>>&dp)
+{
+	if(ind==n)
+	return 0;
+    if(sum==0)
+	return 0;
+	if(dp[ind][sum]!=-1)
+	return dp[ind][sum];
+	//pick
+	int p=INT_MIN;
+	if(v[ind]<=sum)
+	{
+       p=func(ind,v,price,sum-v[ind],n,dp)+price[ind];
+	}
+	int np=func(ind+1,v,price,sum,n,dp)+0;
+	return dp[ind][sum]=max(p,np);
+}
+int cutRod(vector<int> &price, int n)
+{
+	// Write your code here.
+	vector<int>v;
+	vector<vector<int>>dp(n+1,vector<int>(n+1,-1));
+	for(int i=1;i<=n;i++)
+	{
+		v.push_back(i);
+	}
+	return func(0,v,price,n,v.size(),dp);
+
+}
