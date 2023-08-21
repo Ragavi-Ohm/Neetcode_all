@@ -1,0 +1,60 @@
+10 - AMCAT Automata Coding questions
+Print the below pattern where Input n=6.
+
+Output
+
+1111112
+
+3222222
+
+3333334
+
+5444444
+
+5555556
+
+7666666
+
+ANS:
+#include<iostream>
+#include<bitset>
+#include<bits/stdc++.h>
+#include<string>
+using namespace std;
+
+int main()
+{
+    int n=6;
+    int j=1;
+    for(int i=0;i<n;i++)
+    {
+        
+       if(i%2!=0)
+       {
+           int l=j+1;
+           for(int k=0;k<=6;k++)
+           {
+               if(k==0)
+               {
+                   cout<<l;
+               }
+               else
+               cout<<l-1;
+           }
+       }
+       else
+       {
+           int l=j;
+           for(int k=0;k<=6;k++)
+           {
+               if(k!=6)
+               cout<<l;
+               else
+               cout<<l+1;
+           }
+       }
+       cout<<endl;
+       j++;
+        
+    }
+}
